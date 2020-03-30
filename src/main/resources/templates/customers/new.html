@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/main-layout}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+    <div style="padding-top:1em;" class="container" layout:fragment="content">
+        <div style="margin-bottom: 1em;">
+            <span style="font-size: 2em; color: #32a5e7;">New Supplier Form</span>
+        </div>
+
+        <form id="newStudForm" method="post" action="/suppliers/save" th:object="${supplier}">
+            <fieldset>
+                <input type="hidden" name="supplierId" th:value="${supplier.supplierId}"/>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="first">Supplier Number</label>
+                            <span th:if="${#fields.hasErrors('supplierNumber')}" th:errors="*{supplierNumber}"
+                                  class="alert alert-danger"></span>
+                            <input id="supplierNumber" name="supplierNumber" type="text" class="form-control"
+                                   aria-describedby="supplierNumberHelp" placeholder=""
+                                  
+                                   th:value="${supplier.supplierNumber}">
+                            <small id="supplierNumberHelp" class="form-text text-muted">Enter Supplier Number</small>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="first">Name</label>
+                            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+                                  class="alert alert-danger"></span>
+                            <input id="name" name="name" type="text" class="form-control"
+                                   aria-describedby="nameHelp" placeholder=""
+                                  
+                                   th:value="${supplier.name}">
+                            <small id="nameHelp" class="form-text text-muted">Enter Name of Supplier</small>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="contactPhoneNumber">Contact Phone Number</label>
+                            <span th:if="${#fields.hasErrors('contactPhoneNumber')}" th:errors="*{contactPhoneNumber}"
+                                  class="alert alert-danger"></span>
+                            <input id="contactPhoneNumber" name="contactPhoneNumber" type="text" class="form-control"
+                                   aria-describedby="contactPhoneNumberHelp" placeholder=""
+                                 
+                                   th:value="${supplier.contactPhoneNumber}">
+                            <small id="contactPhoneNumberHelp" class="form-text text-muted">Enter contact Phone Number</small>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <div style="float:left;">
+                    <a href="/suppliers/list" class="btn btn-outline-warning">Cancel</a>&nbsp;&nbsp;&nbsp;
+                    <button id="btnSubmit" type="submit" class="btn btn-outline-success">Save</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+   </body>
+</html>

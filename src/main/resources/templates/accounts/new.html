@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/main-layout}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+    <div style="padding-top:1em;" class="container" layout:fragment="content">
+        <div style="margin-bottom: 1em;">
+            <span style="font-size: 2em; color: #32a5e7;">New Product Form</span>
+        </div>
+
+        <form id="newStudForm" method="post" action="/products/save" th:object="${product}">
+            <fieldset>
+                <input type="hidden" name="productId" th:value="${product.productId}"/>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="first">Product Number</label>
+                            <span th:if="${#fields.hasErrors('productNumber')}" th:errors="*{productNumber}"
+                                  class="alert alert-danger"></span>
+                            <input id="productNumber" name="productNumber" type="text" class="form-control"
+                                   aria-describedby="productNumberHelp" placeholder=""
+                                  
+                                   th:value="${product.productNumber}">
+                            <small id="productNumberHelp" class="form-text text-muted">Enter Product Number</small>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="first">Name</label>
+                            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+                                  class="alert alert-danger"></span>
+                            <input id="name" name="name" type="text" class="form-control"
+                                   aria-describedby="nameHelp" placeholder=""
+                                  
+                                   th:value="${product.name}">
+                            <small id="firstNameHelp" class="form-text text-muted">Enter name</small>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="middleName">Unit Price</label>
+                            <span th:if="${#fields.hasErrors('unitPrice')}" th:errors="*{unitPrice}"
+                                  class="alert alert-danger"></span>
+                            <input id="unitPrice" name="unitPrice" type="text" class="form-control"
+                                   aria-describedby="unitPriceHelp" placeholder="0.00"
+                                 
+                                   th:value="${product.unitPrice}">
+                            <small id="unitPriceHelp" class="form-text text-muted">Enter Unit Price</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="productNumber">quantityInStock</label>
+                            <span th:if="${#fields.hasErrors('quantityInStock')}" th:errors="*{quantityInStock}"
+                                  class="alert alert-danger"></span>
+                            <input id="quantityInStock" name="quantityInStock" type="number" class="form-control"
+                                   aria-describedby="quantityInStockHelp" minlength="1" placeholder="0.00"
+                                 
+                                   th:value="${product.quantityInStock}">
+                            <small id="quantityInStockHelp" class="form-text text-muted">Enter Quantity In Stock </small>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="enrollmentDate"> Date Supplied</label>
+                            <span th:if="${#fields.hasErrors('dateSupplied')}" th:errors="*{dateSupplied}"
+                                  class="alert alert-danger"></span>
+                            <input id="dateSupplied" name="dateSupplied" type="date" class="form-control"
+                                   th:value="${product.dateSupplied}">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="supplier">Supplier</label>
+                            <span th:if="${#fields.hasErrors('supplier')}" th:errors="*{supplier}"
+                                  class="alert alert-danger"></span>
+                           <select class="form-control required" id="supplier" name="supplier">
+    <option value="">Select Supplier</option>
+    <option th:each="supplier : ${suppliers}" th:value="${supplier.supplierId}" th:text="${supplier.name}" th:selected="${product?.supplier?.supplierId}==${supplier.supplierId}"></option>
+    </select>
+                            <small id="supplierHelp" class="form-text text-muted">Select Supplier</small>
+                        </div>
+                    </div>
+                </div>
+               
+                <div style="float:left;">
+                    <a href="/products/list" class="btn btn-outline-warning">Cancel</a>&nbsp;&nbsp;&nbsp;
+                    <button id="btnSubmit" type="submit" class="btn btn-outline-success">Save</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+   </body>
+</html>

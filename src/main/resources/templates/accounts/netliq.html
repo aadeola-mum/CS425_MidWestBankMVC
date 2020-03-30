@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/main-layout}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div style="padding-top: 1em;" class="container"
+		layout:fragment="content">
+		<div>
+			<span style="font-size: 2em; color: #32a5e7;">Net Liquidity</span>
+			
+		</div>
+
+		<div style="font-size: 1em">
+			 
+			
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th scope="col">Total Savings</th>
+						<th scope="col">Total Checkings</th>
+						<th scope="col">Total Loans</th>
+						<th scope="col">Net Liquidity</th>
+						
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						
+						<td th:text="${ts}"></td>
+						<td th:text="${tc}"></td>
+						<td th:text="${tl}"></td>
+						<td th:text="${nl}"></td>
+						
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+	</div>
+</body>
+</html>

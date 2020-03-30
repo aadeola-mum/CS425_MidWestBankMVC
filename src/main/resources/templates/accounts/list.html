@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/main-layout}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div style="padding-top: 1em;" class="container"
+		layout:fragment="content">
+		<div>
+			<span style="font-size: 2em; color: #32a5e7;">List of Accounts</span>
+			<span style="float: right;"> <a
+				class="btn btn-outline-success btn-lg" href="/accounts/new">Add
+					Account</a>
+			</span>
+		</div>
+
+		<p>&nbsp;</p>
+		<div style="font-size: 1em">
+			 <form id="searchForm" method="post" action="/accounts/search">
+	            <fieldset>
+	            	<div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+        
+                            <input id="searchText" name="searchText" type="text" class="form-control"
+                              placeholder="Enter Name or Account Number" th:value="${searchText}">
+               
+                        </div>
+                        
+                    </div>
+                    <div class="col-md-8">
+                    <div style="float:left;">
+                    	<input id="btnClear" type="reset" class="btn btn-outline-warning" value="Clear" />&nbsp;&nbsp;&nbsp;
+                    	<button id="btnSubmit" type="submit" class="btn btn-outline-success">Search</button>
+                    </div>
+                        <!-- <div class="form-group">
+                            <label for="first">First name</label>
+                            <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"
+                                  class="alert alert-danger"></span>
+                            <input id="firstName" name="firstName" type="text" class="form-control"
+                                   aria-describedby="firstNameHelp" placeholder=""
+                                  
+                                   th:value="${account.firstName}">
+                            <small id="firstNameHelp" class="form-text text-muted">Enter Firstname</small>
+                        </div> -->
+                    </div>
+                    <!-- <div class="col-md-4">
+                    <button id="btnClear" type="reset"  class="btn btn-outline-warning">Clear</button>&nbsp;&nbsp;&nbsp;
+                    <button id="btnSubmit" type="submit" class="btn btn-outline-success">Save</button>
+                    </div> -->
+                </div>
+	            </fieldset>
+            </form>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Account Number</th>
+						<th scope="col">Customer</th>
+						<th scope="col">Account Type</th>
+						<th scope="col">Balance</th>
+						<th scope="col">&nbsp;</th>
+						<th scope="col">&nbsp;</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="account,iterStat : ${accounts}">
+						<th scope="row" th:text="${iterStat.count}"></th>
+						<td th:text="${account.accountNumber}"></td>
+						<td th:text="${account.customer.getFullName()}"></td>
+						<td th:text="${account.accountType.accountTypeName}"></td>
+						<td th:text="${account.balance}"></td>
+						<td><a th:href="@{'/accounts/edit/{accountId}'(accountId=${account.accountId})}">Edit</a></td>
+						<td><a th:href="@{'/accounts/del/{accountId}'(accountId=${account.accountId})}">Delete</a></td>
+						<!-- <td><a class="delete" data-toggle="modal"
+							data-target="#confirmDeleteBookModal"
+							th:href="@{'/accounts/del/{accountId}'(accountId=${account.accountId})}">Delete</a>
+							                       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+							                           Launch demo modal                        </button>
+						</td> -->
+					</tr>
+					<tr th:if="${accountCount < 1}">
+						<td colspan="7" style="text-align: center;">No Account Available</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+
+		<!-- Modal -->
+		<!-- <div class="modal fade" id="confirmDeleteBookModal" tabindex="-1"
+			role="dialog" aria-labelledby="exampleModalCenterTitle"
+			aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalCenterTitle">Confirm
+							Delete</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">Are you sure you wish to delete this
+						account data?</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">No</button>
+						<button type="button" class="btn btn-primary">Yes</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		 -->
+	</div>
+</body>
+</html>
